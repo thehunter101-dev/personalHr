@@ -5,6 +5,7 @@ class HrRepository {
     seedData();
   }
 
+  int _nextSolicitudId = 1000;
   List<Empresa> _empresas = [];
   List<Usuario> _usuarios = [];
   List<Departamento> _departamentos = [];
@@ -73,11 +74,7 @@ class HrRepository {
     ];
 
     _tiposSolicitud = const [
-      TipoSolicitud(
-        id: 'tipo_vac',
-        nombre: 'Vacaciones',
-        descuentaSaldo: true,
-      ),
+      TipoSolicitud(id: 'tipo_vac', nombre: 'Vacaciones', descuentaSaldo: true),
       TipoSolicitud(
         id: 'tipo_med',
         nombre: 'Permiso Médico',
@@ -230,16 +227,17 @@ class HrRepository {
           id: 'sol_$i',
           empresaId: emp.empresaId,
           empleadoId: emp.id,
-          tipoId:
-              i % 3 == 0 ? 'tipo_vac' : (i % 3 == 1 ? 'tipo_med' : 'tipo_per'),
+          tipoId: i % 3 == 0
+              ? 'tipo_vac'
+              : (i % 3 == 1 ? 'tipo_med' : 'tipo_per'),
           fechaDesde: startDate,
           fechaHasta: endDate,
           dias: (i % 4) + 1,
           estado: i % 4 == 0
               ? EstadoSolicitud.aprobada
               : (i % 4 == 1
-                  ? EstadoSolicitud.rechazada
-                  : EstadoSolicitud.pendiente),
+                    ? EstadoSolicitud.rechazada
+                    : EstadoSolicitud.pendiente),
           aprobadorId: i % 4 != 2 ? 'usr_jefe1' : null,
           comentario: i % 4 != 2 ? 'Revisado y procesado.' : null,
         ),
@@ -261,8 +259,7 @@ class HrRepository {
         empresaId: 'emp_1',
         empleadoId: 'emp_2',
         titulo: 'Configuración del Equipo de Cómputo',
-        descripcion:
-            'Instalar entorno de desarrollo y accesos a GitHub/Slack.',
+        descripcion: 'Instalar entorno de desarrollo y accesos a GitHub/Slack.',
         completada: true,
       ),
       OnboardingTask(
@@ -355,8 +352,7 @@ class HrRepository {
     }
   }
 
-  List<TipoSolicitud> getTiposSolicitud() =>
-      List.unmodifiable(_tiposSolicitud);
+  List<TipoSolicitud> getTiposSolicitud() => List.unmodifiable(_tiposSolicitud);
 
   List<Solicitud> getSolicitudes(String empresaId) {
     return _solicitudes.where((s) => s.empresaId == empresaId).toList();
@@ -371,16 +367,14 @@ class HrRepository {
         .toList();
   }
 
-  List<Solicitud> getSolicitudesByJefe(
-    String empresaId,
-    String jefeUsuarioId,
-  ) {
-    final teamEmpIds =
-        getEmpleadosByJefe(empresaId, jefeUsuarioId).map((e) => e.id).toSet();
+  List<Solicitud> getSolicitudesByJefe(String empresaId, String jefeUsuarioId) {
+    final teamEmpIds = getEmpleadosByJefe(
+      empresaId,
+      jefeUsuarioId,
+    ).map((e) => e.id).toSet();
     return _solicitudes
         .where(
-          (s) =>
-              s.empresaId == empresaId && teamEmpIds.contains(s.empleadoId),
+          (s) => s.empresaId == empresaId && teamEmpIds.contains(s.empleadoId),
         )
         .toList();
   }
@@ -410,8 +404,9 @@ class HrRepository {
           'disponibles y solicitaste $dias días.';
     }
 
+    _nextSolicitudId++;
     final newSolicitud = Solicitud(
-      id: 'sol_${DateTime.now().millisecondsSinceEpoch}',
+      id: 'sol_$_nextSolicitudId',
       empresaId: empresaId,
       empleadoId: empleadoId,
       tipoId: tipoId,
@@ -447,10 +442,26 @@ class HrRepository {
         if (s.estado != EstadoSolicitud.aprobada) return false;
 
         // Overlap if not (current ends before s starts OR current starts after s ends)
-        final cEnd = DateTime(current.fechaHasta.year, current.fechaHasta.month, current.fechaHasta.day);
-        final cStart = DateTime(current.fechaDesde.year, current.fechaDesde.month, current.fechaDesde.day);
-        final sStart = DateTime(s.fechaDesde.year, s.fechaDesde.month, s.fechaDesde.day);
-        final sEnd = DateTime(s.fechaHasta.year, s.fechaHasta.month, s.fechaHasta.day);
+        final cEnd = DateTime(
+          current.fechaHasta.year,
+          current.fechaHasta.month,
+          current.fechaHasta.day,
+        );
+        final cStart = DateTime(
+          current.fechaDesde.year,
+          current.fechaDesde.month,
+          current.fechaDesde.day,
+        );
+        final sStart = DateTime(
+          s.fechaDesde.year,
+          s.fechaDesde.month,
+          s.fechaDesde.day,
+        );
+        final sEnd = DateTime(
+          s.fechaHasta.year,
+          s.fechaHasta.month,
+          s.fechaHasta.day,
+        );
 
         return !(cEnd.isBefore(sStart) || cStart.isAfter(sEnd));
       });
@@ -464,8 +475,9 @@ class HrRepository {
         final nuevoSaldo = empleado.saldoVacaciones - current.dias;
         final empIndex = _empleados.indexWhere((e) => e.id == empleado.id);
         if (empIndex != -1) {
-          _empleados[empIndex] =
-              _empleados[empIndex].copyWith(saldoVacaciones: nuevoSaldo);
+          _empleados[empIndex] = _empleados[empIndex].copyWith(
+            saldoVacaciones: nuevoSaldo,
+          );
         }
       }
     }
@@ -492,10 +504,7 @@ class HrRepository {
     _evaluaciones.add(evaluacion);
   }
 
-  List<OnboardingTask> getOnboardingTasks(
-    String empresaId,
-    String empleadoId,
-  ) {
+  List<OnboardingTask> getOnboardingTasks(String empresaId, String empleadoId) {
     return _onboardingTasks
         .where((t) => t.empresaId == empresaId && t.empleadoId == empleadoId)
         .toList();

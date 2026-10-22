@@ -38,8 +38,8 @@ class SolicitudesState {
 
 class SolicitudesCubit extends Cubit<SolicitudesState> {
   SolicitudesCubit({required HrRepository repository})
-      : _repository = repository,
-        super(const SolicitudesState());
+    : _repository = repository,
+      super(const SolicitudesState());
 
   final HrRepository _repository;
 
@@ -71,8 +71,9 @@ class SolicitudesCubit extends Cubit<SolicitudesState> {
           }
       }
 
-      final status =
-          list.isEmpty ? SolicitudesStatus.empty : SolicitudesStatus.success;
+      final status = list.isEmpty
+          ? SolicitudesStatus.empty
+          : SolicitudesStatus.success;
       emit(state.copyWith(status: status, solicitudes: list, tipos: tipos));
     } catch (e) {
       emit(
@@ -134,8 +135,9 @@ class SolicitudesCubit extends Cubit<SolicitudesState> {
       return false;
     }
 
-    final estadoStr =
-        nuevoEstado == EstadoSolicitud.aprobada ? 'APROBADA' : 'RECHAZADA';
+    final estadoStr = nuevoEstado == EstadoSolicitud.aprobada
+        ? 'APROBADA'
+        : 'RECHAZADA';
 
     loadSolicitudes(currentUser: currentUser, currentEmpleado: currentEmpleado);
     emit(

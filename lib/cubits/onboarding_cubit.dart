@@ -3,10 +3,7 @@ import 'package:personal_hr/models/hr_models.dart';
 import 'package:personal_hr/repositories/hr_repository.dart';
 
 class OnboardingState {
-  const OnboardingState({
-    this.tasks = const [],
-    this.errorMessage,
-  });
+  const OnboardingState({this.tasks = const [], this.errorMessage});
 
   final List<OnboardingTask> tasks;
   final String? errorMessage;
@@ -24,8 +21,8 @@ class OnboardingState {
 
 class OnboardingCubit extends Cubit<OnboardingState> {
   OnboardingCubit({required HrRepository repository})
-      : _repository = repository,
-        super(const OnboardingState());
+    : _repository = repository,
+      super(const OnboardingState());
 
   final HrRepository _repository;
 
@@ -34,10 +31,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     required Empleado? currentEmpleado,
   }) {
     final empId = currentEmpleado?.id ?? 'emp_2';
-    final tasks = _repository.getOnboardingTasks(
-      currentUser.empresaId,
-      empId,
-    );
+    final tasks = _repository.getOnboardingTasks(currentUser.empresaId, empId);
     emit(state.copyWith(tasks: tasks));
   }
 

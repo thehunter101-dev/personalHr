@@ -18,9 +18,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       final auth = context.read<AuthCubit>().state;
       if (auth.currentUser != null) {
         context.read<OnboardingCubit>().loadTasks(
-              currentUser: auth.currentUser!,
-              currentEmpleado: auth.currentEmpleado,
-            );
+          currentUser: auth.currentUser!,
+          currentEmpleado: auth.currentEmpleado,
+        );
       }
     });
   }
@@ -128,10 +128,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 activeColor: Colors.indigo,
                                 onChanged: (_) {
                                   context.read<OnboardingCubit>().toggleTask(
-                                        task.id,
-                                        currentUser: user,
-                                        currentEmpleado: emp,
-                                      );
+                                    task.id,
+                                    currentUser: user,
+                                    currentEmpleado: emp,
+                                  );
                                 },
                               ),
                             );

@@ -54,8 +54,9 @@ class DashboardScreen extends StatelessWidget {
                 context.read<AuthCubit>().resetDemoData();
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content:
-                        Text('✅ Datos ficticios restablecidos correctamente.'),
+                    content: Text(
+                      '✅ Datos ficticios restablecidos correctamente.',
+                    ),
                     backgroundColor: Colors.green,
                   ),
                 );
@@ -144,8 +145,9 @@ class DashboardScreen extends StatelessWidget {
                         separatorBuilder: (_, __) => const Divider(),
                         itemBuilder: (context, index) {
                           final sol = ausenciasSemana[index];
-                          final emp =
-                              repository.getEmpleadoById(sol.empleadoId);
+                          final emp = repository.getEmpleadoById(
+                            sol.empleadoId,
+                          );
                           return ListTile(
                             leading: const CircleAvatar(
                               backgroundColor: Colors.blueAccent,
@@ -153,8 +155,9 @@ class DashboardScreen extends StatelessWidget {
                             ),
                             title: Text(
                               emp?.nombre ?? 'Empleado ${sol.empleadoId}',
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             subtitle: Text(
                               'Duración: ${sol.dias} días (${sol.fechaDesde.day}/${sol.fechaDesde.month} - ${sol.fechaHasta.day}/${sol.fechaHasta.month})',

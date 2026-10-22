@@ -20,9 +20,9 @@ class _EvaluacionesScreenState extends State<EvaluacionesScreen> {
       final auth = context.read<AuthCubit>().state;
       if (auth.currentUser != null) {
         context.read<EvaluacionesCubit>().loadEvaluaciones(
-              currentUser: auth.currentUser!,
-              currentEmpleado: auth.currentEmpleado,
-            );
+          currentUser: auth.currentUser!,
+          currentEmpleado: auth.currentEmpleado,
+        );
       }
     });
   }
@@ -82,11 +82,7 @@ class _EvaluacionesScreenState extends State<EvaluacionesScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.assessment_outlined,
-                    size: 64,
-                    color: Colors.grey,
-                  ),
+                  Icon(Icons.assessment_outlined, size: 64, color: Colors.grey),
                   SizedBox(height: 16),
                   Text(
                     'No hay evaluaciones registradas.',
@@ -201,9 +197,9 @@ class _EvaluacionesScreenState extends State<EvaluacionesScreen> {
     Empleado? emp,
   ) {
     final team = context.read<HrRepository>().getEmpleadosByJefe(
-          user.empresaId,
-          user.id,
-        );
+      user.empresaId,
+      user.id,
+    );
 
     if (team.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(

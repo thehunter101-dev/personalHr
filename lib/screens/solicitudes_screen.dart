@@ -20,9 +20,9 @@ class _SolicitudesScreenState extends State<SolicitudesScreen> {
       final auth = context.read<AuthCubit>().state;
       if (auth.currentUser != null) {
         context.read<SolicitudesCubit>().loadSolicitudes(
-              currentUser: auth.currentUser!,
-              currentEmpleado: auth.currentEmpleado,
-            );
+          currentUser: auth.currentUser!,
+          currentEmpleado: auth.currentEmpleado,
+        );
       }
     });
   }
@@ -244,8 +244,7 @@ class _SolicitudesScreenState extends State<SolicitudesScreen> {
       builder: (dialogContext) {
         return StatefulBuilder(
           builder: (context, setDialogState) {
-            final diasCalculados =
-                fechaHasta.difference(fechaDesde).inDays + 1;
+            final diasCalculados = fechaHasta.difference(fechaDesde).inDays + 1;
 
             return AlertDialog(
               title: const Text('Solicitar Permiso / Vacaciones'),

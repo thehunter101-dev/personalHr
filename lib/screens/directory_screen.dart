@@ -18,7 +18,9 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final auth = context.read<AuthCubit>().state;
       if (auth.currentUser != null) {
-        context.read<DirectoryCubit>().loadDirectory(auth.currentUser!.empresaId);
+        context.read<DirectoryCubit>().loadDirectory(
+          auth.currentUser!.empresaId,
+        );
       }
     });
   }
@@ -47,7 +49,8 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
                     prefixIcon: Icon(Icons.search),
                     border: OutlineInputBorder(),
                   ),
-                  onChanged: (val) => context.read<DirectoryCubit>().search(val),
+                  onChanged: (val) =>
+                      context.read<DirectoryCubit>().search(val),
                 ),
               ),
               Expanded(
@@ -79,7 +82,9 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
                               ),
                               title: Text(
                                 emp.nombre,
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               subtitle: Text(
                                 '${emp.cargo} • Fecha Ingreso: ${df.format(emp.fechaIngreso)}',

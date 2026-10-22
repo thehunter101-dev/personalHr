@@ -3,10 +3,7 @@ import 'package:personal_hr/models/hr_models.dart';
 import 'package:personal_hr/repositories/hr_repository.dart';
 
 class DirectoryState {
-  const DirectoryState({
-    this.empleados = const [],
-    this.searchQuery = '',
-  });
+  const DirectoryState({this.empleados = const [], this.searchQuery = ''});
 
   final List<Empleado> empleados;
   final String searchQuery;
@@ -26,8 +23,8 @@ class DirectoryState {
 
 class DirectoryCubit extends Cubit<DirectoryState> {
   DirectoryCubit({required HrRepository repository})
-      : _repository = repository,
-        super(const DirectoryState());
+    : _repository = repository,
+      super(const DirectoryState());
 
   final HrRepository _repository;
 

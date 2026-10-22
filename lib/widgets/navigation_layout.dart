@@ -155,18 +155,12 @@ class NavigationLayout extends StatelessWidget {
       ];
     }
     return const [
-      BottomNavigationBarItem(
-        icon: Icon(Icons.dashboard),
-        label: 'Dashboard',
-      ),
+      BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Dashboard'),
       BottomNavigationBarItem(
         icon: Icon(Icons.assignment),
         label: 'Solicitudes',
       ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.people),
-        label: 'Directorio',
-      ),
+      BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Directorio'),
       BottomNavigationBarItem(
         icon: Icon(Icons.assessment),
         label: 'Evaluaciones',

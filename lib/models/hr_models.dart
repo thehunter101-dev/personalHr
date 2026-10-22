@@ -14,27 +14,23 @@ extension UserRoleX on UserRole {
 }
 
 class Empresa {
-  const Empresa({
-    required this.id,
-    required this.nombre,
-    required this.ciudad,
-  });
+  const Empresa({required this.id, required this.nombre, required this.ciudad});
 
   factory Empresa.fromJson(Map<String, dynamic> json) => Empresa(
-        id: json['id'] as String,
-        nombre: json['nombre'] as String,
-        ciudad: json['ciudad'] as String,
-      );
+    id: json['id'] as String,
+    nombre: json['nombre'] as String,
+    ciudad: json['ciudad'] as String,
+  );
 
   final String id;
   final String nombre;
   final String ciudad;
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'nombre': nombre,
-        'ciudad': ciudad,
-      };
+    'id': id,
+    'nombre': nombre,
+    'ciudad': ciudad,
+  };
 }
 
 class Usuario {
@@ -47,12 +43,12 @@ class Usuario {
   });
 
   factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
-        id: json['id'] as String,
-        empresaId: json['empresaId'] as String,
-        nombre: json['nombre'] as String,
-        correo: json['correo'] as String,
-        rol: UserRole.values.firstWhere((e) => e.name == json['rol']),
-      );
+    id: json['id'] as String,
+    empresaId: json['empresaId'] as String,
+    nombre: json['nombre'] as String,
+    correo: json['correo'] as String,
+    rol: UserRole.values.firstWhere((e) => e.name == json['rol']),
+  );
 
   final String id;
   final String empresaId;
@@ -61,12 +57,12 @@ class Usuario {
   final UserRole rol;
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'empresaId': empresaId,
-        'nombre': nombre,
-        'correo': correo,
-        'rol': rol.name,
-      };
+    'id': id,
+    'empresaId': empresaId,
+    'nombre': nombre,
+    'correo': correo,
+    'rol': rol.name,
+  };
 }
 
 class Departamento {

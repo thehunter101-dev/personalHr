@@ -38,8 +38,8 @@ class EvaluacionesState {
 
 class EvaluacionesCubit extends Cubit<EvaluacionesState> {
   EvaluacionesCubit({required HrRepository repository})
-      : _repository = repository,
-        super(const EvaluacionesState());
+    : _repository = repository,
+      super(const EvaluacionesState());
 
   final HrRepository _repository;
 
@@ -84,18 +84,11 @@ class EvaluacionesCubit extends Cubit<EvaluacionesState> {
 
       final status = list.isEmpty ? HrStatus.empty : HrStatus.success;
       emit(
-        state.copyWith(
-          status: status,
-          evaluaciones: list,
-          teamMembers: team,
-        ),
+        state.copyWith(status: status, evaluaciones: list, teamMembers: team),
       );
     } catch (e) {
       emit(
-        state.copyWith(
-          status: HrStatus.failure,
-          errorMessage: e.toString(),
-        ),
+        state.copyWith(status: HrStatus.failure, errorMessage: e.toString()),
       );
     }
   }

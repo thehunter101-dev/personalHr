@@ -85,10 +85,7 @@ class _AppViewState extends State<AppView> {
         ),
         ShellRoute(
           builder: (context, state, child) {
-            return NavigationLayout(
-              currentRoute: state.uri.path,
-              child: child,
-            );
+            return NavigationLayout(currentRoute: state.uri.path, child: child);
           },
           routes: [
             GoRoute(
@@ -125,10 +122,7 @@ class _AppViewState extends State<AppView> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'PersonalHR',
-      theme: ThemeData(
-        colorSchemeSeed: Colors.indigo,
-        useMaterial3: true,
-      ),
+      theme: ThemeData(colorSchemeSeed: Colors.indigo, useMaterial3: true),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
