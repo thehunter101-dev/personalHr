@@ -1,5 +1,5 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_hr/counter/counter.dart';
 import 'package:personal_hr/l10n/l10n.dart';
 
